@@ -4,11 +4,11 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "test-debian"
+  config.vm.box = "debian-6.0.3"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "test-debian.box"
+  # config.vm.box_url = "http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
@@ -44,9 +44,10 @@ Vagrant::Config.run do |config|
   # #               Managed by Puppet.\n"
   # # }
   #
-config.vm.provision :puppet, :options => ["--modulepath","modules", "--verbose --debug"] do |puppet|
+config.vm.provision :puppet, :options => ["--modulepath", "modules-0", "--verbose --debug"] do |puppet|
    puppet.manifests_path = "manifests"
-   puppet.manifest_file  = "test-debian.pp"
+   puppet.manifest_file  = "debian-dotclear.pp"
+   puppet.module_path = "modules"
 end
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative

@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+    ServerName dotclear.local
+    DocumentRoot /var/www/dotclear.local/public
+</VirtualHost>
