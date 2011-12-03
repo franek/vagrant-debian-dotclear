@@ -18,15 +18,7 @@ class behat {
     }
     exec { "sudo pear channel-discover pear.behat.org"  :
     path => "/usr/bin:/usr/sbin:/bin",
-    require => Package['php-pear'],
-    }
-    exec { "sudo pear install behat/behat" :
-    path => "/usr/bin:/usr/sbin:/bin",
-    require => Package['php-pear'],
-    }
-    exec { "sudo pear install behat/mink-beta" :
-    path => "/usr/bin:/usr/sbin:/bin",
-    require => Package['php-pear'],
+    require => Package['php-pear']
     }
 
     exec { "sudo pear channel-discover pear.phpunit.de" :
@@ -44,8 +36,17 @@ class behat {
     require => Package['php-pear'],
     }
 
+    exec { "sudo pear install behat/behat" :
+    path => "/usr/bin:/usr/sbin:/bin",
+    require => [ Package['php-pear'], Exec['sudo pear channel-discover pear.behat.org'] ]
+    }
+    exec { "sudo pear install behat/mink-beta" :
+    path => "/usr/bin:/usr/sbin:/bin",
+    require => [Package['php-pear'], Exec["sudo pear install behat/behat"]]
+    }
+
     exec { "sudo pear install phpunit/PHPUnit" :
     path => "/usr/bin:/usr/sbin:/bin",
-    require => Package['php-pear'],
+    require => [ Package['php-pear'], Exec["sudo pear channel-discover pear.phpunit.de"] ]
     }
 }

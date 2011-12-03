@@ -8,10 +8,17 @@ class dotclear {
         require => Service['apache2']
     }
 
-    file { "/var/www/dotclear.local/public" :
+    #
+    # On supprime le contenu du répertoire s'il existe
+    # 
+    file { "/var/www/dotclear.local/public/" :
         ensure => "directory",
         mode => "0777",
-        require => File['/var/www/dotclear.local']
+        require => File['/var/www/dotclear.local'],
+        purge => "true",
+        recurse => "true",
+        force => "true",
+        source => "puppet:///dotclear/empty_dir"
     }
 
     exec { "get dotclear" :

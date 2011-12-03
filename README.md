@@ -2,13 +2,16 @@ debian-dotclear
 ---------------
 
 Ce dépôt contient des fichiers de configuration Vagrant et puppet permettant de lancer rapidement une VM contenant : 
+
  * apache2
  * php5
  * mysql
  * dotclear (non configuré, présence du script dotclear2-loader.php)
- * behat [4]
+ * [behat] [4]
 
 L'objectif de cette VM est de disposer d'un environnement de tests de dotclear.
+
+Cette VM propose quelques tests fonctionnels s'appuyant sur Behat.
 
 Pré-requis : 
 --
@@ -44,6 +47,7 @@ Pour créer une basebox debian-6.0.3 à jour, vous pouvez utiliser [veewee] [3] 
         
         vagrant box list
 
+
 Usage :
 --
  1. Cloner le dépôt
@@ -69,8 +73,30 @@ Pour arrêter complètement la VM :
 
          vagrant halt
 
+Pour lancer les tests behat : 
+
+ - se connecter sur la VM : 
+
+        vagrant ssh
+
+ - lancer les tests : 
+
+        cd behat-dotclear
+        behat
+
+Pour réinitialiser l'environnement (suppression de la base, suppression des fichiers, ...), il est possible de demander à puppet de réexécuter le "provisonning) (commande à éxécuter depuis la machine hôte) :
+
+        vagrant provision
+
+
+A propos de Behat
+--
+
+Les tests behat sont écrits en français (/franglais). Il serait plus pertinent de les écrire en anglais.
+
 A faire : 
 --
+ - Récupérer Dotclear depuis Mercurial
  - améliorer le Virtual Host de apache :
    * ajouter les rewriting rules
    * ajouter la compression gzip sur les fichiers statiques

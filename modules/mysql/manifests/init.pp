@@ -36,15 +36,23 @@ class mysql::server {
 }
 
 define mysql::db( $user, $password ) {
+    # 
+    # On supprime la base de donnée si elle existe
+    # 
+    exec { "drop-${name}-db":
+        command => "/usr/bin/mysql -uroot -p${mysql_root_password} -e \"drop database ${name};\"",
+        require => Service["mysql"],
+    }
+
     exec { "create-${name}-db":
         unless => "/usr/bin/mysql -uroot ${name}",
-        command => "/usr/bin/mysql -uroot -e \"create database ${name};\"",
-        require => Service["mysql"],
+        command => "/usr/bin/mysql -uroot -p${mysql_root_password} -e \"create database ${name};\"",
+        require => [Service["mysql"], Exec["drop-${name}-db"] ]
     }
 
     exec { "grant-${name}-db":
         unless => "/usr/bin/mysql -u${user} -p${password} ${name}",
-        command => "/usr/bin/mysql -uroot -e \"grant all on ${name}.* to ${user}@localhost identified by '$password';\"",
+        command => "/usr/bin/mysql -uroot -p${mysql_root_password} -e \"grant all on ${name}.* to ${user}@localhost identified by '$password';\"",
         require => [Service["mysql"], Exec["create-${name}-db"]]
     }
 }
