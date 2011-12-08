@@ -41,13 +41,15 @@ define mysql::db( $user, $password ) {
     # 
     exec { "drop-${name}-db":
         command => "/usr/bin/mysql -uroot -p${mysql_root_password} -e \"drop database ${name};\"",
-        require => Service["mysql"],
+        require => [Service["mysql"], Package["mysql-server"] ],
+        onlyif  => "/usr/bin/mysql -uroot -p${mysql_root_password} --execute=\"SHOW DATABASES;\" | grep -x '${name}'",
     }
 
     exec { "create-${name}-db":
-        unless => "/usr/bin/mysql -uroot ${name}",
         command => "/usr/bin/mysql -uroot -p${mysql_root_password} -e \"create database ${name};\"",
-        require => [Service["mysql"], Exec["drop-${name}-db"] ]
+        unless  => "/usr/bin/mysql -uroot -p${mysql_root_password} --execute=\"SHOW DATABASES;\" | grep -x '${name}'",
+        logoutput => "true",
+        require => [ Service["mysql"], Package["mysql-server"], Exec["set-mysql-password"] ]
     }
 
     exec { "grant-${name}-db":
@@ -55,5 +57,6 @@ define mysql::db( $user, $password ) {
         command => "/usr/bin/mysql -uroot -p${mysql_root_password} -e \"grant all on ${name}.* to ${user}@localhost identified by '$password';\"",
         require => [Service["mysql"], Exec["create-${name}-db"]]
     }
+
 }
 

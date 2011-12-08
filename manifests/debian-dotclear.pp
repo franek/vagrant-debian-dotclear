@@ -61,6 +61,13 @@ line { "modify /etc/hosts" :
 }
 
 
+# Run apt-get update when anything beneath /etc/apt/ changes
+# source http://blog.kumina.nl/2010/11/puppet-tipstricks-running-apt-get-update-only-when-needed/
+exec { "apt-get update":
+    command => "/usr/bin/apt-get update",
+    onlyif => "/bin/sh -c '[ ! -f /var/cache/apt/pkgcache.bin ] || /usr/bin/find /etc/apt/* -cnewer /var/cache/apt/pkgcache.bin | /bin/grep . > /dev/null'",
+}
+
 #
 # Installation de mysql et initialisation du compte root
 #

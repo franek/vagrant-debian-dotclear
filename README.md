@@ -89,10 +89,13 @@ Pour réinitialiser l'environnement (suppression de la base, suppression des fic
         vagrant provision
 
 
-A propos de Behat
+Problèmes connus
 --
 
-Les tests behat sont écrits en français (/franglais). Il serait plus pertinent de les écrire en anglais.
+Lors du premier lancement de behat, il est possible qu'il "crie" en raison de l'absence de phpunit. Le problème vient de puppet qui n'arrive pas à installer phpunit lors de l'initialisation de la VM pour une raison inconnue. Pour régler le problème, il faut relancer : 
+    
+        vagrant provision
+
 
 A faire : 
 --
@@ -103,7 +106,6 @@ A faire :
    * ajouter les entêtes HTTP
  - améliorer la configuration de PHP
  - ajouter xhprof, xdebug ...
- - ajouter des tests fonctionnels (behat) permettant de valider la procédure d'installation
 
 [1]: http://vagrantup.com/
 [2]: https://www.virtualbox.org/
