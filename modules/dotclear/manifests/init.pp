@@ -18,7 +18,7 @@ class dotclear {
         purge => "true",
         recurse => "true",
         force => "true",
-        source => "puppet:///dotclear/empty_dir"
+        source => "puppet:///modules/dotclear/empty_dir"
     }
 
     exec { "get dotclear" :
