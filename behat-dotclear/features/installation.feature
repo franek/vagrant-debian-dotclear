@@ -1,8 +1,8 @@
 # features/installation.feature
 Feature: Dotclear installation with the wizard
   In order to install Dotclear, 
-  En tant qu'utilisateur du site
-  We need to be able to validate each form of the wizard
+  As a website administrator
+  I need to be able to validate each form of the wizard
 
   Scenario: Wizard redirection
     Given I am on "/"
@@ -12,7 +12,7 @@ Feature: Dotclear installation with the wizard
   Scenario: The wizard should send an error message if fields are empty
     Given I am on "/admin/install/wizard.php"
     When I press "Continue"
-    Then the "div.error" element should contain "<p><strong>Errors:</strong></p><p>Unable to connect to database</p>"
+    Then the "div.error" element should contain "<p><strong>Errors:</strong></p><p>Unable to use database</p>"
 
   Scenario: Proceed installation
     Given I am on "/admin/install/wizard.php"

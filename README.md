@@ -45,13 +45,14 @@ Usage :
 Installation de dotclear dans VM :
 --------------------------------
 
- Vous pouvez suivre la procédure d'installation (par défaut, la base de données créée se nomme dotclear, user mysql = dotclear, mot de passe mysql = dotclear) depuis [http://dotclear.local/dotclear2-loader.php] ou automatiquement via behat : 
+ Vous pouvez suivre la procédure d'installation manuelle depuis [http://dotclear.local/dotclear2-loader.php] (par défaut, la base de données créée se nomme dotclear, user mysql = dotclear, mot de passe mysql = dotclear) ou automatiquement via behat : 
  
          host > vagrant ssh
          guest > cd behat-dotclear
          guest > ../bin/behat
          # puis dirigez vous à l'adresse [http://dotclear.local] où dotclear devrait être installé.
 
+Si vous choisissez l'installation automatique, le compte d'admin de dotclear est admin/admin23.
 
 Recréer complétement l'environnement :
 --------------------------------------
@@ -96,6 +97,13 @@ Réinitialiser la VM (installation de dotclear) :
 Pour réinitialiser l'environnement (suppression de la base de données, suppression de l'installation de dotclear, ...), il est possible de demander à puppet de réexécuter le "provisonning) (commande à éxécuter depuis la machine hôte) :
 
         host > vagrant provision
+
+Accéder à PHPMyAdmin
+--------------------
+
+* URL : http://dotclear.local/phpmyadmin
+* login : root
+* mdp : admin
 
 
 A faire : 
