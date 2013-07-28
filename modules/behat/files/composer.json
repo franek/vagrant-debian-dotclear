@@ -1,0 +1,14 @@
+{
+    "require": {
+        "behat/behat": "2.4.*@stable",
+        "symfony/css-selector" : "*",
+        "symfony/dom-crawler" : "*",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-sahi-driver":  "*"
+    },
+
+    "config": {
+        "bin-dir": "bin/"
+    }
+}

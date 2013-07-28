@@ -6,6 +6,7 @@ use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
+use Behat\MinkExtension\Context\MinkContext;
 
 //
 // Require 3rd-party libraries here:
@@ -14,11 +15,11 @@ use Behat\Gherkin\Node\PyStringNode,
 //   require_once 'PHPUnit/Framework/Assert/Functions.php';
 //
 
-require_once 'mink/autoload.php';
+#require_once 'mink/autoload.php';
 // or, if you want to use phar from current dir:
 // require_once __DIR__ . '/mink.phar';
 
-class FeatureContext extends Behat\Mink\Behat\Context\MinkContext
+class FeatureContext extends MinkContext
 {
 
 

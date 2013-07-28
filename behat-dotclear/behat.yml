@@ -1,4 +1,10 @@
 default:
-  context:
-    parameters:
-      base_url: http://dotclear.local/
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url:  http://dotclear.local/
+            goutte: ~
+            sahi: ~
+
+#  context:
+#    parameters:
+#      base_url: http://dotclear.local/
