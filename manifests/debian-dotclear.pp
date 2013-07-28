@@ -21,6 +21,7 @@ group { "puppet":
 #
 File { owner => 0, group => 0, mode => 0644 }
 
+
 #
 # Permet de vérifier que puppet fonctionne
 #
@@ -67,6 +68,11 @@ exec { "apt-get update":
     command => "/usr/bin/apt-get update",
     onlyif => "/bin/sh -c '[ ! -f /var/cache/apt/pkgcache.bin ] || /usr/bin/find /etc/apt/* -cnewer /var/cache/apt/pkgcache.bin | /bin/grep . > /dev/null'",
 }
+
+package { "libaugeas-ruby":
+        ensure => present;
+    }
+
 
 #
 # Installation de mysql et initialisation du compte root
