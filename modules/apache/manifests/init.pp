@@ -14,7 +14,7 @@ class apache {
     }
 
     file { [ "/etc/apache2/sites-available/dotclear.local" ] :
-        source => "puppet:///apache/dotclear.local",
+        source => "puppet:///modules/apache/dotclear.local",
         notify => Service["apache2"],
     }
 
@@ -22,5 +22,12 @@ class apache {
       path => "/usr/bin:/usr/sbin:/bin",
       notify => Service["apache2"],
       require => File["/etc/apache2/sites-available/dotclear.local"]
+    }
+    
+    line { "apache2.conf" : 
+       file => "/etc/apache2/apache2.conf",
+       line => "ServerName localhost",
+       ensure => "present",
+       notify => Service["apache2"]
     }
 }
